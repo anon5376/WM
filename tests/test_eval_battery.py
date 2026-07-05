@@ -25,6 +25,9 @@ def test_eval_battery_outputs_baselines_probes_and_killtests(tmp_path: Path):
         assert "shuffled_input_loss" in vals
     assert metrics["probes"]
     assert metrics["transfer"]
+    assert len(metrics["transfer"]["text"]) >= 2
+    assert len(metrics["transfer"]["signal"]) >= 2
+    assert len(metrics["transfer"]["grid"]) >= 2
     assert (out / "metrics.json").exists()
     assert (out / "probe_summary.csv").exists()
     assert (out / "killtest_table.csv").exists()

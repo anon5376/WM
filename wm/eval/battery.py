@@ -220,10 +220,12 @@ def evaluate_prediction(trainer: Trainer, train_rows: dict[str, list[dict[str, A
 def transfer_eval(trainer: Trainer, heldout_rows: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
     transfer: dict[str, Any] = {}
     for modality, rows in heldout_rows.items():
+        grouped: dict[str, list[dict[str, Any]]] = {}
+        for row in rows:
+            grouped.setdefault(row["meta"]["family"], []).append(row)
         by_family: dict[str, list[float]] = {}
-        for row in rows[:24]:
-            fam = row["meta"]["family"]
-            by_family.setdefault(fam, []).append(model_loss(trainer, row))
+        for fam, family_rows in sorted(grouped.items()):
+            by_family[fam] = [model_loss(trainer, row) for row in family_rows[:12]]
         transfer[modality] = {fam: float(np.mean(vals)) for fam, vals in sorted(by_family.items())}
     return transfer
 
