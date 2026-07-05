@@ -6,6 +6,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from wm.data.grid import rule_table
+
 
 def read_json(path: str | Path) -> dict[str, Any]:
     return json.loads(Path(path).read_text())
@@ -46,6 +48,8 @@ def write_report(
     probe_files = sorted((run_dir / "probes").glob("*.csv"))
     checkpoint_files = sorted(run_dir.glob("checkpoint_step_*.pt"))
     latest_step = latest_metric_step(run_dir / "metrics.jsonl")
+    train_rule_tables = {seed: rule_table(seed) for seed in manifest["seeds"]["grid_train_rule_seeds"]}
+    heldout_rule_tables = {seed: rule_table(seed) for seed in manifest["splits"]["heldout_grid_rule_seeds"]}
 
     lines = [
         "# BUILD REPORT WM N2R",
@@ -72,6 +76,8 @@ def write_report(
         f"- Held-out grammar families: `{manifest['splits']['heldout_grammar_families']}`",
         f"- Held-out signal families: `{manifest['splits']['heldout_signal_families']}`",
         f"- Held-out grid rule seeds: `{manifest['splits']['heldout_grid_rule_seeds']}`",
+        f"- Grid train rule tables: `{train_rule_tables}`",
+        f"- Grid held-out rule-flip tables: `{heldout_rule_tables}`",
         "",
         "## Training Run",
         "",

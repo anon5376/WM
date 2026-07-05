@@ -22,6 +22,8 @@ Night 2R replaced the blocked WM0 absorption path with a fresh local bootstrap. 
 - Held-out grammar families: `['grammar_2', 'grammar_3']`
 - Held-out signal families: `['signal_2', 'signal_3']`
 - Held-out grid rule seeds: `[101, 102]`
+- Grid train rule tables: `{11: {0: 0, 1: 1}, 12: {0: 0, 1: 1}}`
+- Grid held-out rule-flip tables: `{101: {0: 1, 1: 0}, 102: {0: 1, 1: 0}}`
 
 ## Training Run
 

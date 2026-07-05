@@ -10,7 +10,7 @@ def test_report_writer_uses_evidence_files(tmp_path: Path):
         "counts": {"total_samples": 1},
         "total_bytes": 10,
         "external_data": [],
-        "seeds": {"sample_seed_base": 1},
+        "seeds": {"sample_seed_base": 1, "grid_train_rule_seeds": [11]},
         "splits": {"heldout_grammar_families": [], "heldout_signal_families": [], "heldout_grid_rule_seeds": []},
     }
     run = tmp_path / "run"
@@ -38,4 +38,3 @@ def test_report_writer_uses_evidence_files(tmp_path: Path):
     text = out.read_text()
     assert "# BUILD REPORT WM N2R" in text
     assert "Prediction And Baselines" in text
-
