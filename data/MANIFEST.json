@@ -1,0 +1,111 @@
+{
+  "counts": {
+    "by_shard": {
+      "v1/heldout/events.jsonl": 48,
+      "v1/heldout/grid.jsonl": 24,
+      "v1/heldout/signal.jsonl": 48,
+      "v1/heldout/text.jsonl": 48,
+      "v1/train/events.jsonl": 48,
+      "v1/train/grid.jsonl": 24,
+      "v1/train/signal.jsonl": 48,
+      "v1/train/text.jsonl": 48
+    },
+    "total_samples": 336
+  },
+  "dataset": "wm001-v1",
+  "external_data": [],
+  "manifest_sha256": "f3e62fdca9d0dc86e832a7c23ec3e7f0e90f166c5c56213c9c3ca522a4b850ea",
+  "schema": "{modality,tokens|tensor,meta,target?}",
+  "seeds": {
+    "grid_heldout_rule_seeds": [
+      101,
+      102
+    ],
+    "grid_train_rule_seeds": [
+      11,
+      12
+    ],
+    "sample_seed_base": 7000
+  },
+  "shards": [
+    {
+      "bytes": 256446,
+      "modality": "events",
+      "path": "v1/heldout/events.jsonl",
+      "samples": 48,
+      "sha256": "63b2e290fe293c3fad9cbf9fad2bc4ddea0c628ef1d2682d3a63048a4cf7b29f",
+      "split": "heldout"
+    },
+    {
+      "bytes": 4738781,
+      "modality": "grid",
+      "path": "v1/heldout/grid.jsonl",
+      "samples": 24,
+      "sha256": "77ac884874d0d9644e3ad0e6a6f3c705ccc663c8b5cd409ec6688b3651ba1b1e",
+      "split": "heldout"
+    },
+    {
+      "bytes": 123228,
+      "modality": "signal",
+      "path": "v1/heldout/signal.jsonl",
+      "samples": 48,
+      "sha256": "dd4b058d2f53889f9a0cfc1247be565c32d2af7d96368d6688b2b5833684dda2",
+      "split": "heldout"
+    },
+    {
+      "bytes": 19820,
+      "modality": "text",
+      "path": "v1/heldout/text.jsonl",
+      "samples": 48,
+      "sha256": "295ce5e6b9764bdac0ee16c41120113f1c318e3d709417aa983bae79ebca77ef",
+      "split": "heldout"
+    },
+    {
+      "bytes": 253449,
+      "modality": "events",
+      "path": "v1/train/events.jsonl",
+      "samples": 48,
+      "sha256": "c3367ed6d7d06841a54492a8e11772721dd5d18570d472cd351977564194ada1",
+      "split": "train"
+    },
+    {
+      "bytes": 4846233,
+      "modality": "grid",
+      "path": "v1/train/grid.jsonl",
+      "samples": 24,
+      "sha256": "ac0fb4f4d3530f46ee57addd19154e2e220efcd59d52e9e59d96510d92e87d91",
+      "split": "train"
+    },
+    {
+      "bytes": 123106,
+      "modality": "signal",
+      "path": "v1/train/signal.jsonl",
+      "samples": 48,
+      "sha256": "b0bb4f2997c4842cfac8629869b513b6e854a33fbf95009dd514d4924d3e8100",
+      "split": "train"
+    },
+    {
+      "bytes": 19368,
+      "modality": "text",
+      "path": "v1/train/text.jsonl",
+      "samples": 48,
+      "sha256": "9849ea24b0eafa366689a50f49b934508885fb942968850c23d86b9bd7a72256",
+      "split": "train"
+    }
+  ],
+  "splits": {
+    "heldout_grammar_families": [
+      "grammar_2",
+      "grammar_3"
+    ],
+    "heldout_grid_rule_seeds": [
+      101,
+      102
+    ],
+    "heldout_signal_families": [
+      "signal_2",
+      "signal_3"
+    ]
+  },
+  "total_bytes": 10380431
+}
