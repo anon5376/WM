@@ -62,3 +62,18 @@ def test_checkpoint_rejects_config_mismatch(tmp_path: Path):
     else:
         raise AssertionError("config mismatch was accepted")
 
+
+def test_checkpoint_load_accepts_rng_state_tensor_on_selected_device(tmp_path: Path):
+    config = load_config("configs/test_tiny.yaml")
+    config["run_root"] = str(tmp_path / "run")
+    trainer = Trainer(config)
+    trainer.train(stop_after_steps=1)
+    ckpt = trainer.latest_checkpoint()
+    assert ckpt is not None
+    payload = torch.load(ckpt, map_location=trainer.device)
+    payload["torch_rng_state"] = payload["torch_rng_state"].to(trainer.device)
+    altered = tmp_path / "rng_device_checkpoint.pt"
+    torch.save(payload, altered)
+    restored = Trainer(config)
+    restored.load_checkpoint(altered)
+    assert restored.step == 1

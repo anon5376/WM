@@ -88,7 +88,10 @@ class Trainer:
         self.sampler.load_state_dict(ckpt["sampler"])
         self.step = int(ckpt["step"])
         self.history = list(ckpt.get("history", []))
-        torch.set_rng_state(ckpt["torch_rng_state"])
+        torch_rng_state = ckpt["torch_rng_state"]
+        if isinstance(torch_rng_state, torch.Tensor) and torch_rng_state.device.type != "cpu":
+            torch_rng_state = torch_rng_state.cpu()
+        torch.set_rng_state(torch_rng_state)
         random.setstate(ckpt["python_rng_state"])
         np.random.set_state(ckpt["numpy_rng_state"])
 
