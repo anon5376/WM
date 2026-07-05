@@ -1,0 +1,7 @@
+modality,probe,accuracy
+grid,grid_position,0.4375
+grid,grid_class,0.0
+text,text_nonterminal,0.6875
+signal,signal_frequency_band,0.0
+events,event_verb,0.0
+events,event_source,0.0

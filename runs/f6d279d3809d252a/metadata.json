@@ -1,0 +1,11 @@
+{
+  "config_hash": "f6d279d3809d252a",
+  "device": {
+    "mps_available": true,
+    "reason": "auto selected mps",
+    "requested": "auto",
+    "selected": "mps"
+  },
+  "parameter_count": 11727027,
+  "run_id": "f6d279d3809d252a"
+}

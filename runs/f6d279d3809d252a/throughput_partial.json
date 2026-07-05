@@ -1,0 +1,110 @@
+{
+  "checkpoint_count": 18,
+  "checkpoint_window": {
+    "elapsed_seconds": 275.82236552238464,
+    "first_step": 500,
+    "last_step": 9000,
+    "steps_per_second": 30.816935326842355
+  },
+  "checkpoints": [
+    {
+      "mtime": 1783247065.9802668,
+      "path": "runs/f6d279d3809d252a/checkpoint_step_000500.pt",
+      "step": 500
+    },
+    {
+      "mtime": 1783247081.9829094,
+      "path": "runs/f6d279d3809d252a/checkpoint_step_001000.pt",
+      "step": 1000
+    },
+    {
+      "mtime": 1783247098.309571,
+      "path": "runs/f6d279d3809d252a/checkpoint_step_001500.pt",
+      "step": 1500
+    },
+    {
+      "mtime": 1783247114.4813147,
+      "path": "runs/f6d279d3809d252a/checkpoint_step_002000.pt",
+      "step": 2000
+    },
+    {
+      "mtime": 1783247130.4809227,
+      "path": "runs/f6d279d3809d252a/checkpoint_step_002500.pt",
+      "step": 2500
+    },
+    {
+      "mtime": 1783247146.7465084,
+      "path": "runs/f6d279d3809d252a/checkpoint_step_003000.pt",
+      "step": 3000
+    },
+    {
+      "mtime": 1783247162.9668388,
+      "path": "runs/f6d279d3809d252a/checkpoint_step_003500.pt",
+      "step": 3500
+    },
+    {
+      "mtime": 1783247178.7933414,
+      "path": "runs/f6d279d3809d252a/checkpoint_step_004000.pt",
+      "step": 4000
+    },
+    {
+      "mtime": 1783247195.1874552,
+      "path": "runs/f6d279d3809d252a/checkpoint_step_004500.pt",
+      "step": 4500
+    },
+    {
+      "mtime": 1783247212.4609787,
+      "path": "runs/f6d279d3809d252a/checkpoint_step_005000.pt",
+      "step": 5000
+    },
+    {
+      "mtime": 1783247228.2473032,
+      "path": "runs/f6d279d3809d252a/checkpoint_step_005500.pt",
+      "step": 5500
+    },
+    {
+      "mtime": 1783247244.027691,
+      "path": "runs/f6d279d3809d252a/checkpoint_step_006000.pt",
+      "step": 6000
+    },
+    {
+      "mtime": 1783247259.8771555,
+      "path": "runs/f6d279d3809d252a/checkpoint_step_006500.pt",
+      "step": 6500
+    },
+    {
+      "mtime": 1783247275.7068875,
+      "path": "runs/f6d279d3809d252a/checkpoint_step_007000.pt",
+      "step": 7000
+    },
+    {
+      "mtime": 1783247292.8292882,
+      "path": "runs/f6d279d3809d252a/checkpoint_step_007500.pt",
+      "step": 7500
+    },
+    {
+      "mtime": 1783247309.2593436,
+      "path": "runs/f6d279d3809d252a/checkpoint_step_008000.pt",
+      "step": 8000
+    },
+    {
+      "mtime": 1783247325.8437693,
+      "path": "runs/f6d279d3809d252a/checkpoint_step_008500.pt",
+      "step": 8500
+    },
+    {
+      "mtime": 1783247341.8026323,
+      "path": "runs/f6d279d3809d252a/checkpoint_step_009000.pt",
+      "step": 9000
+    }
+  ],
+  "eval_count": 1,
+  "evals": [
+    {
+      "path": "runs/f6d279d3809d252a/eval/scheduled_step_000000.json",
+      "step": 0,
+      "wall_time_unix": 1783247047.998326
+    }
+  ],
+  "run_dir": "runs/f6d279d3809d252a"
+}

@@ -1,0 +1,302 @@
+{
+  "checkpoint": "runs/f6d279d3809d252a/checkpoint_step_056500.pt",
+  "config": "configs/s3.yaml",
+  "killtests": {
+    "passed": false,
+    "rows": [
+      {
+        "passed": true,
+        "test": "grid_prediction_loss_max",
+        "threshold": 0.75,
+        "value": 0.023699288334076602
+      },
+      {
+        "passed": true,
+        "test": "grid_persistence_present",
+        "threshold": "present",
+        "value": 0.022251637109244864
+      },
+      {
+        "passed": true,
+        "test": "grid_unigram_or_frequency_present",
+        "threshold": "present",
+        "value": 0.02977374444405238
+      },
+      {
+        "passed": true,
+        "test": "grid_shuffled_input_present",
+        "threshold": "present",
+        "value": 0.03354343834022681
+      },
+      {
+        "passed": true,
+        "test": "grid_shuffled_loss_ratio_min",
+        "threshold": 0.5,
+        "value": 0.7065253148379648
+      },
+      {
+        "passed": true,
+        "test": "text_prediction_loss_max",
+        "threshold": 6.25,
+        "value": 4.736738999684651
+      },
+      {
+        "passed": true,
+        "test": "text_persistence_present",
+        "threshold": "present",
+        "value": 14.385605935180331
+      },
+      {
+        "passed": true,
+        "test": "text_unigram_or_frequency_present",
+        "threshold": "present",
+        "value": 3.3820575302373768
+      },
+      {
+        "passed": true,
+        "test": "text_shuffled_input_present",
+        "threshold": "present",
+        "value": 9.510501782099405
+      },
+      {
+        "passed": false,
+        "test": "text_shuffled_loss_ratio_min",
+        "threshold": 0.5,
+        "value": 0.49805353158127846
+      },
+      {
+        "passed": true,
+        "test": "signal_prediction_loss_max",
+        "threshold": 1.0,
+        "value": 0.01656256600593527
+      },
+      {
+        "passed": true,
+        "test": "signal_persistence_present",
+        "threshold": "present",
+        "value": 0.05289523210376501
+      },
+      {
+        "passed": true,
+        "test": "signal_unigram_or_frequency_present",
+        "threshold": "present",
+        "value": 0.23713957394162813
+      },
+      {
+        "passed": true,
+        "test": "signal_shuffled_input_present",
+        "threshold": "present",
+        "value": 0.46725199619929
+      },
+      {
+        "passed": false,
+        "test": "signal_shuffled_loss_ratio_min",
+        "threshold": 0.5,
+        "value": 0.03544675280289458
+      },
+      {
+        "passed": true,
+        "test": "events_prediction_loss_max",
+        "threshold": 6.25,
+        "value": 1.0324348260958989
+      },
+      {
+        "passed": true,
+        "test": "events_persistence_present",
+        "threshold": "present",
+        "value": 14.30895730998895
+      },
+      {
+        "passed": true,
+        "test": "events_unigram_or_frequency_present",
+        "threshold": "present",
+        "value": 3.8725482338651087
+      },
+      {
+        "passed": true,
+        "test": "events_shuffled_input_present",
+        "threshold": "present",
+        "value": 6.497531811396281
+      },
+      {
+        "passed": false,
+        "test": "events_shuffled_loss_ratio_min",
+        "threshold": 0.5,
+        "value": 0.15889646346710762
+      },
+      {
+        "passed": false,
+        "test": "grid_grid_position_accuracy_min",
+        "threshold": 0.25,
+        "value": 0.125
+      },
+      {
+        "passed": false,
+        "test": "grid_grid_class_accuracy_min",
+        "threshold": 0.25,
+        "value": 0.0
+      },
+      {
+        "passed": true,
+        "test": "text_text_nonterminal_accuracy_min",
+        "threshold": 0.25,
+        "value": 0.875
+      },
+      {
+        "passed": false,
+        "test": "signal_signal_frequency_band_accuracy_min",
+        "threshold": 0.25,
+        "value": 0.0
+      },
+      {
+        "passed": false,
+        "test": "events_event_verb_accuracy_min",
+        "threshold": 0.25,
+        "value": 0.0
+      },
+      {
+        "passed": false,
+        "test": "events_event_source_accuracy_min",
+        "threshold": 0.25,
+        "value": 0.0
+      },
+      {
+        "passed": true,
+        "test": "grid_rule_seed_101_transfer_loss_max",
+        "threshold": 1.0,
+        "value": 0.023699288334076602
+      },
+      {
+        "passed": true,
+        "test": "grid_rule_seed_102_transfer_loss_max",
+        "threshold": 1.0,
+        "value": 0.01951435177276532
+      },
+      {
+        "passed": true,
+        "test": "text_grammar_2_transfer_loss_max",
+        "threshold": 6.75,
+        "value": 4.781136254469554
+      },
+      {
+        "passed": true,
+        "test": "signal_signal_2_transfer_loss_max",
+        "threshold": 1.25,
+        "value": 0.017247868158544104
+      },
+      {
+        "passed": true,
+        "test": "events_event_2_transfer_loss_max",
+        "threshold": 6.75,
+        "value": 1.0917276814579964
+      }
+    ],
+    "spec": {
+      "calibration": {
+        "note": "Night 2R first calibration; thresholds are fixed for this battery after M5 commit.",
+        "status": "provisional_single_wl4_calibration",
+        "version": 1
+      },
+      "thresholds": {
+        "prediction_loss_max": {
+          "events": 6.25,
+          "grid": 0.75,
+          "signal": 1.0,
+          "text": 6.25
+        },
+        "probe_accuracy_min": 0.25,
+        "required_baselines": [
+          "persistence",
+          "unigram_or_frequency",
+          "shuffled_input"
+        ],
+        "shuffled_loss_ratio_min": {
+          "events": 0.5,
+          "grid": 0.5,
+          "signal": 0.5,
+          "text": 0.5
+        },
+        "transfer_loss_max": {
+          "events": 6.75,
+          "grid": 1.0,
+          "signal": 1.25,
+          "text": 6.75
+        }
+      }
+    }
+  },
+  "prediction": {
+    "events": {
+      "model_loss": 1.0324348260958989,
+      "persistence_loss": 14.30895730998895,
+      "shuffled_input_loss": 6.497531811396281,
+      "unigram_or_frequency_loss": 3.8725482338651087
+    },
+    "grid": {
+      "model_loss": 0.023699288334076602,
+      "persistence_loss": 0.022251637109244864,
+      "shuffled_input_loss": 0.03354343834022681,
+      "unigram_or_frequency_loss": 0.02977374444405238
+    },
+    "signal": {
+      "model_loss": 0.01656256600593527,
+      "persistence_loss": 0.05289523210376501,
+      "shuffled_input_loss": 0.46725199619929,
+      "unigram_or_frequency_loss": 0.23713957394162813
+    },
+    "text": {
+      "model_loss": 4.736738999684651,
+      "persistence_loss": 14.385605935180331,
+      "shuffled_input_loss": 9.510501782099405,
+      "unigram_or_frequency_loss": 3.3820575302373768
+    }
+  },
+  "probes": [
+    {
+      "accuracy": 0.125,
+      "modality": "grid",
+      "probe": "grid_position"
+    },
+    {
+      "accuracy": 0.0,
+      "modality": "grid",
+      "probe": "grid_class"
+    },
+    {
+      "accuracy": 0.875,
+      "modality": "text",
+      "probe": "text_nonterminal"
+    },
+    {
+      "accuracy": 0.0,
+      "modality": "signal",
+      "probe": "signal_frequency_band"
+    },
+    {
+      "accuracy": 0.0,
+      "modality": "events",
+      "probe": "event_verb"
+    },
+    {
+      "accuracy": 0.0,
+      "modality": "events",
+      "probe": "event_source"
+    }
+  ],
+  "step": 56500,
+  "transfer": {
+    "events": {
+      "event_2": 1.0917276814579964
+    },
+    "grid": {
+      "rule_seed_101": 0.023699288334076602,
+      "rule_seed_102": 0.01951435177276532
+    },
+    "signal": {
+      "signal_2": 0.017247868158544104
+    },
+    "text": {
+      "grammar_2": 4.781136254469554
+    }
+  }
+}

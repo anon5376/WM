@@ -1,0 +1,5 @@
+step,label,modality,probe,value
+55331,scheduled,text,scheduled_loss,1.8013632143265568e-05
+55331,scheduled,events,scheduled_loss,1.3652948837261647e-05
+55331,scheduled,signal,scheduled_loss,0.0026797475293278694
+55331,scheduled,grid,scheduled_loss,0.0001958508655661717
