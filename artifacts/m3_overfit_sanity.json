@@ -1,0 +1,29 @@
+{
+  "config": "configs/overfit.yaml",
+  "modalities": {
+    "events": {
+      "fall_ratio": 27283.960338435147,
+      "final_loss": 0.00021522042516153306,
+      "initial_loss": 5.872065544128418,
+      "passed": true
+    },
+    "grid": {
+      "fall_ratio": 387972.33741532435,
+      "final_loss": 1.0358280633226968e-06,
+      "initial_loss": 0.4018726348876953,
+      "passed": true
+    },
+    "signal": {
+      "fall_ratio": 1316236539.8781428,
+      "final_loss": 3.5011904486736967e-10,
+      "initial_loss": 0.46083948016166687,
+      "passed": true
+    },
+    "text": {
+      "fall_ratio": 21239.71339612277,
+      "final_loss": 0.00028690017643384635,
+      "initial_loss": 6.093677520751953,
+      "passed": true
+    }
+  }
+}
