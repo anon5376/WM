@@ -1,0 +1,23 @@
+calibration:
+  version: 1
+  status: provisional_single_wl4_calibration
+  note: "Night 2R first calibration; thresholds are fixed for this battery after M5 commit."
+thresholds:
+  prediction_loss_max:
+    grid: 0.75
+    text: 6.25
+    signal: 1.0
+    events: 6.25
+  shuffled_loss_ratio_min:
+    grid: 0.50
+    text: 0.50
+    signal: 0.50
+    events: 0.50
+  required_baselines: [persistence, unigram_or_frequency, shuffled_input]
+  probe_accuracy_min: 0.25
+  transfer_loss_max:
+    grid: 1.0
+    text: 6.75
+    signal: 1.25
+    events: 6.75
+
