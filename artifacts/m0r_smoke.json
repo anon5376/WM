@@ -1,0 +1,7 @@
+{
+  "device_reason": "auto selected mps",
+  "mps_available": true,
+  "requested_device": "auto",
+  "selected_device": "mps",
+  "torch_version": "2.2.2"
+}
