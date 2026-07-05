@@ -148,6 +148,10 @@ class Trainer:
                 scheduled_eval(self, "scheduled")
                 next_eval_time = time.time() + float(eval_every_seconds)
             metric = self.train_step()
+            now = time.time()
+            metric["wall_time_unix"] = now
+            metric["elapsed_seconds"] = now - start_time
+            metric["steps_per_second"] = self.step / max(now - start_time, 1e-9)
             if self.step % log_every == 0 or self.step == 1:
                 with metrics_path.open("a") as f:
                     f.write(json.dumps(metric, sort_keys=True) + "\n")
