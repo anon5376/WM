@@ -10,6 +10,7 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
+from wm.eval.scheduled import scheduled_eval
 from wm.runtime import select_device
 from wm.train.config import config_hash, run_dir
 from wm.train.data import PreparedSample, SequentialSampler, load_training_rows, prepare_sample
@@ -134,19 +135,25 @@ class Trainer:
         checkpoint_every = int(self.config["train"]["checkpoint_every_steps"])
         log_every = int(self.config["train"]["log_every_steps"])
         wall_clock_seconds = self.config["train"].get("wall_clock_seconds")
+        eval_every_seconds = self.config["train"].get("eval_every_seconds")
         start_time = time.time()
         deadline = None if wall_clock_seconds is None else start_time + float(wall_clock_seconds)
+        next_eval_time = start_time if eval_every_seconds is not None else None
         stop_at = max_steps if stop_after_steps is None else min(max_steps, self.step + stop_after_steps)
         metrics_path = self.run_path / "metrics.jsonl"
         while self.step < stop_at:
             if deadline is not None and time.time() >= deadline:
                 break
+            if next_eval_time is not None and time.time() >= next_eval_time:
+                scheduled_eval(self, "scheduled")
+                next_eval_time = time.time() + float(eval_every_seconds)
             metric = self.train_step()
             if self.step % log_every == 0 or self.step == 1:
                 with metrics_path.open("a") as f:
                     f.write(json.dumps(metric, sort_keys=True) + "\n")
             if self.step % checkpoint_every == 0:
                 self.save_checkpoint()
+        if eval_every_seconds is not None:
+            scheduled_eval(self, "final")
         self.save_checkpoint()
         return self.history
-

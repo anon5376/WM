@@ -13,5 +13,5 @@ runs/**
 !runs/.gitkeep
 !runs/**/
 !runs/**/*.json
+!runs/**/*.jsonl
 !runs/**/*.csv
-
