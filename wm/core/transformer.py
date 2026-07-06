@@ -30,6 +30,5 @@ class SharedTransformerCore(nn.Module):
         mask = None
         if causal:
             seq_len = x.shape[1]
-            mask = torch.full((seq_len, seq_len), float("-inf"), device=x.device)
-            mask = torch.triu(mask, diagonal=1)
+            mask = torch.triu(torch.ones((seq_len, seq_len), dtype=torch.bool, device=x.device), diagonal=1)
         return self.final_norm(self.net(x, mask=mask))

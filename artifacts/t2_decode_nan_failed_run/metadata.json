@@ -1,0 +1,13 @@
+{
+  "config_hash": "eb2b204d7a033057",
+  "device": {
+    "mps_available": true,
+    "reason": "auto selected mps",
+    "requested": "auto",
+    "selected": "mps"
+  },
+  "max_epochs": 3,
+  "parameter_count": 11727027,
+  "run_id": "eb2b204d7a033057",
+  "train_row_count": 12000
+}
