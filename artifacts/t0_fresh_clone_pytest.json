@@ -1,0 +1,15 @@
+{
+  "commit": "2a62b32",
+  "fresh_clone": {
+    "editable_install": true,
+    "repo": "https://github.com/anon5376/WM.git",
+    "test_command": "python -m pytest",
+    "torch_version": "2.2.2"
+  },
+  "result": {
+    "passed": 24,
+    "status": "green",
+    "warnings": 6
+  },
+  "verified_utc": "2026-07-06T10:44:00Z"
+}
