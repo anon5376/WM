@@ -26,6 +26,10 @@ class SharedTransformerCore(nn.Module):
         self.net = nn.TransformerEncoder(block, num_layers=layers)
         self.final_norm = nn.LayerNorm(d_model)
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        return self.final_norm(self.net(x))
-
+    def forward(self, x: torch.Tensor, *, causal: bool = False) -> torch.Tensor:
+        mask = None
+        if causal:
+            seq_len = x.shape[1]
+            mask = torch.full((seq_len, seq_len), float("-inf"), device=x.device)
+            mask = torch.triu(mask, diagonal=1)
+        return self.final_norm(self.net(x, mask=mask))

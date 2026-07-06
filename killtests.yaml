@@ -20,4 +20,8 @@ thresholds:
     text: 6.75
     signal: 1.25
     events: 6.75
-
+decode_thresholds:
+  byte_loss_margin_min:
+    unigram: 0.25
+    bigram: 0.05
+  coherence_bigram_overlap_min: 0.55

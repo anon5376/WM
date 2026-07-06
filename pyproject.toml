@@ -15,6 +15,9 @@ dependencies = [
   "pytest==8.2.2",
 ]
 
+[project.scripts]
+wm = "wm.cli:main"
+
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["wm*"]
@@ -22,4 +25,3 @@ include = ["wm*"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
-

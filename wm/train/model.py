@@ -36,10 +36,10 @@ class MultiModalPredictor(nn.Module):
         self.grid_head = GridInverseHead(d_model)
         self.signal_head = SignalInverseHead(d_model)
 
-    def forward_textlike(self, tokens: torch.Tensor, name: str) -> torch.Tensor:
+    def forward_textlike(self, tokens: torch.Tensor, name: str, *, causal: bool = False) -> torch.Tensor:
         x = self.byte_embed(tokens)
         x = self.type_pos(x, MODALITY_IDS[name])
-        return self.byte_head(self.core(x))
+        return self.byte_head(self.core(x, causal=causal))
 
     def forward_grid(self, frames: torch.Tensor) -> torch.Tensor:
         x = self.grid_embed(frames)
@@ -54,4 +54,3 @@ class MultiModalPredictor(nn.Module):
 
 def count_parameters(model: nn.Module) -> int:
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
-

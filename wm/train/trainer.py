@@ -105,7 +105,8 @@ class Trainer:
 
     def loss_for(self, prepared: PreparedSample) -> torch.Tensor:
         if prepared.modality in {"text", "events"}:
-            logits = self.model.forward_textlike(prepared.inputs, prepared.modality)
+            causal = bool(self.config["model"].get("causal_text", False))
+            logits = self.model.forward_textlike(prepared.inputs, prepared.modality, causal=causal)
             return F.cross_entropy(logits.reshape(-1, 256), prepared.targets.reshape(-1))
         if prepared.modality == "grid":
             pred = self.model.forward_grid(prepared.inputs)

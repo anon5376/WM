@@ -1,0 +1,28 @@
+seed: 12345
+device: cpu
+run_root: runs
+data:
+  root: data
+  version: v1
+  split: train
+  modalities: [text]
+  max_seq_len:
+    text: 32
+model:
+  d_model: 32
+  layers: 1
+  heads: 4
+  dim_feedforward: 64
+  dropout: 0.0
+  max_len: 64
+  causal_text: true
+train:
+  lr: 0.003
+  max_steps: 5
+  max_epochs: null
+  wall_clock_seconds: null
+  checkpoint_every_steps: 5
+  log_every_steps: 1
+  eval_every_seconds: null
+loss_weights:
+  text: 1.0
