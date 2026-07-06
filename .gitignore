@@ -8,6 +8,8 @@ __pycache__/
 build/
 dist/
 *.egg-info/
+WM-*-tech-review/
+WM-*-tech-review.zip
 runs/**
 !runs/
 !runs/.gitkeep
