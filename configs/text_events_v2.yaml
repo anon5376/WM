@@ -1,0 +1,29 @@
+seed: 20260706
+device: auto
+run_root: runs
+data:
+  root: data
+  version: v2
+  split: train
+  modalities: [text, events]
+  max_seq_len:
+    text: 160
+    events: 224
+model:
+  d_model: 256
+  layers: 6
+  heads: 4
+  dim_feedforward: 3072
+  dropout: 0.0
+  max_len: 256
+train:
+  lr: 0.0003
+  max_steps: 120000
+  max_epochs: 3
+  wall_clock_seconds: 14400
+  checkpoint_every_steps: 12000
+  log_every_steps: 100
+  eval_every_seconds: 1800
+loss_weights:
+  text: 1.0
+  events: 1.0

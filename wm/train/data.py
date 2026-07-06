@@ -19,8 +19,8 @@ class PreparedSample:
     mask: torch.Tensor | None = None
 
 
-def load_training_rows(data_root: str | Path, split: str, modalities: list[str]) -> list[dict[str, Any]]:
-    root = Path(data_root) / "v1" / split
+def load_training_rows(data_root: str | Path, split: str, modalities: list[str], version: str = "v1") -> list[dict[str, Any]]:
+    root = Path(data_root) / version / split
     rows: list[dict[str, Any]] = []
     for modality in modalities:
         rows.extend(read_jsonl(root / f"{modality}.jsonl"))
@@ -72,4 +72,3 @@ def prepare_sample(row: dict[str, Any], max_seq_len: int, device: torch.device) 
             frames = torch.cat([frames, frames[-1:].clone()], dim=0)
         return PreparedSample(modality, frames[:-1].unsqueeze(0), frames[1:].unsqueeze(0))
     raise ValueError(f"unknown modality {modality}")
-

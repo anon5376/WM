@@ -19,8 +19,8 @@ from wm.train.data import load_training_rows, prepare_sample
 from wm.train.trainer import Trainer
 
 
-def rows_by_modality(data_root: str | Path, split: str, modalities: list[str]) -> dict[str, list[dict[str, Any]]]:
-    root = Path(data_root) / "v1" / split
+def rows_by_modality(data_root: str | Path, split: str, modalities: list[str], version: str = "v1") -> dict[str, list[dict[str, Any]]]:
+    root = Path(data_root) / version / split
     return {modality: read_jsonl(root / f"{modality}.jsonl") for modality in modalities}
 
 
@@ -282,8 +282,9 @@ def run_battery(config_path: str | Path, checkpoint_path: str | Path, output_dir
     trainer = Trainer(config)
     trainer.load_checkpoint(checkpoint_path)
     trainer.model.eval()
-    train_rows = rows_by_modality(config["data"]["root"], "train", config["data"]["modalities"])
-    heldout_rows = rows_by_modality(config["data"]["root"], "heldout", config["data"]["modalities"])
+    version = config["data"].get("version", "v1")
+    train_rows = rows_by_modality(config["data"]["root"], "train", config["data"]["modalities"], version)
+    heldout_rows = rows_by_modality(config["data"]["root"], "heldout", config["data"]["modalities"], version)
     metrics = {
         "config": str(config_path),
         "checkpoint": str(checkpoint_path),

@@ -27,7 +27,13 @@ class Trainer:
         self.device = torch.device(self.device_info.selected)
         self.seed = int(config["seed"])
         self._seed_all(self.seed)
-        rows = load_training_rows(config["data"]["root"], config["data"]["split"], config["data"]["modalities"])
+        rows = load_training_rows(
+            config["data"]["root"],
+            config["data"]["split"],
+            config["data"]["modalities"],
+            config["data"].get("version", "v1"),
+        )
+        self.train_row_count = len(rows)
         self.sampler = SequentialSampler(rows, self.seed)
         self.model = MultiModalPredictor(config).to(self.device)
         self.optimizer = torch.optim.AdamW(self.model.parameters(), lr=float(config["train"]["lr"]))
@@ -45,6 +51,8 @@ class Trainer:
             "device": self.device_info.__dict__,
             "parameter_count": count_parameters(self.model),
             "config_hash": self.hash,
+            "train_row_count": self.train_row_count,
+            "max_epochs": self.config["train"].get("max_epochs"),
         }
 
     def save_config(self) -> None:
@@ -128,6 +136,7 @@ class Trainer:
             "loss": float(raw_loss.detach().cpu()),
             "weighted_loss": float(loss.detach().cpu()),
             "cursor": self.sampler.cursor,
+            "epoch": self.sampler.cursor / max(self.train_row_count, 1),
         }
         self.history.append(metric)
         return metric
@@ -135,6 +144,8 @@ class Trainer:
     def train(self, *, stop_after_steps: int | None = None) -> list[dict[str, Any]]:
         self.save_config()
         max_steps = int(self.config["train"]["max_steps"])
+        max_epochs = self.config["train"].get("max_epochs")
+        epoch_step_cap = None if max_epochs is None else int(float(max_epochs) * self.train_row_count)
         checkpoint_every = int(self.config["train"]["checkpoint_every_steps"])
         log_every = int(self.config["train"]["log_every_steps"])
         wall_clock_seconds = self.config["train"].get("wall_clock_seconds")
@@ -143,6 +154,8 @@ class Trainer:
         deadline = None if wall_clock_seconds is None else start_time + float(wall_clock_seconds)
         next_eval_time = start_time if eval_every_seconds is not None else None
         stop_at = max_steps if stop_after_steps is None else min(max_steps, self.step + stop_after_steps)
+        if epoch_step_cap is not None:
+            stop_at = min(stop_at, epoch_step_cap)
         metrics_path = self.run_path / "metrics.jsonl"
         while self.step < stop_at:
             if deadline is not None and time.time() >= deadline:

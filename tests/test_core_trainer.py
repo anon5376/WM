@@ -5,6 +5,8 @@ import torch
 import yaml
 
 from wm.train.config import load_config
+from wm.data.build_dataset import build_dataset
+from wm.train.data import load_training_rows
 from wm.train.model import MultiModalPredictor, count_parameters
 from wm.train.trainer import Trainer
 
@@ -77,3 +79,20 @@ def test_checkpoint_load_accepts_rng_state_tensor_on_selected_device(tmp_path: P
     restored = Trainer(config)
     restored.load_checkpoint(altered)
     assert restored.step == 1
+
+
+def test_training_stops_at_hard_epoch_cap(tmp_path: Path):
+    data_root = tmp_path / "data"
+    build_dataset(data_root, samples_per_family=1)
+    config = load_config("configs/test_tiny.yaml")
+    config["data"]["root"] = str(data_root)
+    config["data"]["modalities"] = ["text", "events"]
+    config["train"]["max_steps"] = 999
+    config["train"]["max_epochs"] = 2
+    config["train"]["checkpoint_every_steps"] = 999
+    config["run_root"] = str(tmp_path / "run")
+    expected_rows = len(load_training_rows(data_root, "train", ["text", "events"]))
+    trainer = Trainer(config)
+    trainer.train()
+    assert trainer.step == expected_rows * 2
+    assert trainer.history[-1]["epoch"] == 2.0

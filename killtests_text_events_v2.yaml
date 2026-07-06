@@ -1,0 +1,16 @@
+calibration:
+  version: 1
+  status: t_track_single_wg6_calibration
+  note: "WM_TEXT_01 T1 calibration; thresholds tighten text/events shuffled ratio and require held-out family transfer rows."
+thresholds:
+  prediction_loss_max:
+    text: 5.75
+    events: 5.75
+  shuffled_loss_ratio_min:
+    text: 0.75
+    events: 0.75
+  required_baselines: [persistence, unigram_or_frequency, shuffled_input]
+  probe_accuracy_min: 0.30
+  transfer_loss_max:
+    text: 6.25
+    events: 6.25

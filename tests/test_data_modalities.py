@@ -1,10 +1,10 @@
 from pathlib import Path
 
 from wm.data.build_dataset import build_dataset
-from wm.data.events import generate_event_sample, validate_event_stream
+from wm.data.events import generate_event_sample, generate_event_v2_sample, validate_event_stream, validate_event_v2_stream
 from wm.data.schema import read_jsonl
 from wm.data.signal import generate_signal_sample, marker_positions
-from wm.data.text import generate_text_sample, validate_text_sample
+from wm.data.text import generate_text_sample, generate_text_v2_sample, validate_text_sample, validate_text_v2_sample
 
 
 def test_text_grammar_derivation_is_valid():
@@ -29,6 +29,20 @@ def test_event_stream_is_eg1_shape_valid():
     assert row["tokens"].splitlines()[0].startswith('{"event_id"')
 
 
+def test_text_v2_grammar_derivation_is_valid():
+    row = generate_text_v2_sample(456, "textv2_0", "train")
+    assert row["modality"] == "text"
+    assert validate_text_v2_sample(row)
+    assert row["meta"]["version"] == "text-v2"
+
+
+def test_event_v2_stream_is_linked_eg1_shape_valid():
+    row = generate_event_v2_sample(456, "eventv2_0", "train", length=8)
+    assert row["modality"] == "events"
+    assert validate_event_v2_stream(row)
+    assert '"prev":null' in row["tokens"].splitlines()[0]
+
+
 def test_dataset_generation_is_byte_deterministic(tmp_path: Path):
     one = tmp_path / "one"
     two = tmp_path / "two"
@@ -46,3 +60,18 @@ def test_dataset_generation_is_byte_deterministic(tmp_path: Path):
     rows = read_jsonl(one / "v1/train/text.jsonl")
     assert rows and rows[0]["modality"] == "text"
 
+
+def test_dataset_v2_generation_is_byte_deterministic(tmp_path: Path):
+    from wm.data.build_dataset import build_text_events_v2_dataset
+
+    one = tmp_path / "one"
+    two = tmp_path / "two"
+    manifest_one = build_text_events_v2_dataset(one, samples_per_train_family=3, samples_per_heldout_family=2)
+    manifest_two = build_text_events_v2_dataset(two, samples_per_train_family=3, samples_per_heldout_family=2)
+    assert manifest_one["counts"] == manifest_two["counts"]
+    assert manifest_one["counts"]["total_samples"] == 44
+    for shard in manifest_one["shards"]:
+        rel = shard["path"]
+        assert (one / rel).read_bytes() == (two / rel).read_bytes()
+    rows = read_jsonl(one / "v2/train/text.jsonl")
+    assert rows and rows[0]["meta"]["version"] == "text-v2"
