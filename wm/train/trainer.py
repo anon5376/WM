@@ -80,7 +80,7 @@ class Trainer:
         return path
 
     def load_checkpoint(self, path: str | Path) -> None:
-        ckpt = torch.load(path, map_location=self.device)
+        ckpt = torch.load(path, map_location=self.device, weights_only=False)
         if ckpt["config_hash"] != self.hash:
             raise ValueError("checkpoint config hash does not match current config")
         self.model.load_state_dict(ckpt["model"])

@@ -1,0 +1,15 @@
+{
+  "asset": {
+    "digest": "sha256:61e2cb61907d7e2ebbb61c7c77e8f7383c71617a7ecdfafefdb0c2039e260295",
+    "name": "checkpoint_step_150000.pt",
+    "size": 150033703,
+    "state": "uploaded",
+    "url": "https://github.com/anon5376/WM/releases/download/wm-checkpoints-f6d279d3809d252a/checkpoint_step_150000.pt"
+  },
+  "release": {
+    "asset_count_after_upload": 301,
+    "tag": "wm-checkpoints-f6d279d3809d252a",
+    "url": "https://github.com/anon5376/WM/releases/tag/wm-checkpoints-f6d279d3809d252a"
+  },
+  "verified_utc": "2026-07-06T10:42:18Z"
+}
