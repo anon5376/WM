@@ -173,6 +173,8 @@ def run_probes(trainer: Trainer, train_rows: dict[str, list[dict[str, Any]]], he
     }
     results = []
     for modality, probes in probe_map.items():
+        if modality not in train_rows or modality not in heldout_rows:
+            continue
         tr = train_rows[modality][:16]
         te = heldout_rows[modality][:16]
         train_x = np.stack([latent_vector(trainer, row) for row in tr])
@@ -187,11 +189,12 @@ def run_probes(trainer: Trainer, train_rows: dict[str, list[dict[str, Any]]], he
 
 def evaluate_prediction(trainer: Trainer, train_rows: dict[str, list[dict[str, Any]]], eval_rows: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
     byte_probs = {
-        "text": byte_unigram(train_rows["text"]),
-        "events": byte_unigram(train_rows["events"]),
+        modality: byte_unigram(train_rows[modality])
+        for modality in ("text", "events")
+        if modality in train_rows
     }
-    grid_mean = grid_frequency_frame(train_rows["grid"]).to(trainer.device)
-    signal_mean = signal_frequency_frame(train_rows["signal"]).to(trainer.device)
+    grid_mean = grid_frequency_frame(train_rows["grid"]).to(trainer.device) if "grid" in train_rows else None
+    signal_mean = signal_frequency_frame(train_rows["signal"]).to(trainer.device) if "signal" in train_rows else None
     out: dict[str, Any] = {}
     for modality, rows in eval_rows.items():
         rows = rows[:12]
@@ -201,9 +204,11 @@ def evaluate_prediction(trainer: Trainer, train_rows: dict[str, list[dict[str, A
             persistence = [byte_persistence_loss(row) for row in rows]
             unigram = [byte_unigram_loss(row, byte_probs[modality]) for row in rows]
         elif modality == "grid":
+            assert grid_mean is not None
             persistence = [grid_persistence_loss(row) for row in rows]
             unigram = [grid_frequency_loss(row, grid_mean.cpu()) for row in rows]
         elif modality == "signal":
+            assert signal_mean is not None
             persistence = [signal_persistence_loss(row) for row in rows]
             unigram = [signal_frequency_loss(row, signal_mean.cpu()) for row in rows]
         else:

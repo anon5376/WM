@@ -1,0 +1,180 @@
+{
+  "checkpoint": "runs/5928db1b03a07a60/checkpoint_step_072000.pt",
+  "config": "configs/text_events_v2.yaml",
+  "killtests": {
+    "passed": false,
+    "rows": [
+      {
+        "passed": true,
+        "test": "text_prediction_loss_max",
+        "threshold": 5.75,
+        "value": 1.5990396756630314e-05
+      },
+      {
+        "passed": true,
+        "test": "text_persistence_present",
+        "threshold": "present",
+        "value": 14.56795060587576
+      },
+      {
+        "passed": true,
+        "test": "text_unigram_or_frequency_present",
+        "threshold": "present",
+        "value": 3.23540849238773
+      },
+      {
+        "passed": true,
+        "test": "text_shuffled_input_present",
+        "threshold": "present",
+        "value": 15.074763456980387
+      },
+      {
+        "passed": false,
+        "test": "text_shuffled_loss_ratio_min",
+        "threshold": 0.75,
+        "value": 1.0607394804079623e-06
+      },
+      {
+        "passed": true,
+        "test": "events_prediction_loss_max",
+        "threshold": 5.75,
+        "value": 1.4258899454944185e-05
+      },
+      {
+        "passed": true,
+        "test": "events_persistence_present",
+        "threshold": "present",
+        "value": 14.236640034418379
+      },
+      {
+        "passed": true,
+        "test": "events_unigram_or_frequency_present",
+        "threshold": "present",
+        "value": 3.8120043224824323
+      },
+      {
+        "passed": true,
+        "test": "events_shuffled_input_present",
+        "threshold": "present",
+        "value": 12.249168793360392
+      },
+      {
+        "passed": false,
+        "test": "events_shuffled_loss_ratio_min",
+        "threshold": 0.75,
+        "value": 1.1640707786370908e-06
+      },
+      {
+        "passed": true,
+        "test": "text_text_nonterminal_accuracy_min",
+        "threshold": 0.3,
+        "value": 0.6875
+      },
+      {
+        "passed": false,
+        "test": "events_event_verb_accuracy_min",
+        "threshold": 0.3,
+        "value": 0.0
+      },
+      {
+        "passed": false,
+        "test": "events_event_source_accuracy_min",
+        "threshold": 0.3,
+        "value": 0.0
+      },
+      {
+        "passed": true,
+        "test": "text_textv2_6_transfer_loss_max",
+        "threshold": 6.25,
+        "value": 1.5990396756630314e-05
+      },
+      {
+        "passed": true,
+        "test": "text_textv2_7_transfer_loss_max",
+        "threshold": 6.25,
+        "value": 8.998347008552325e-05
+      },
+      {
+        "passed": true,
+        "test": "events_eventv2_6_transfer_loss_max",
+        "threshold": 6.25,
+        "value": 1.4258899454944185e-05
+      },
+      {
+        "passed": true,
+        "test": "events_eventv2_7_transfer_loss_max",
+        "threshold": 6.25,
+        "value": 0.004253362442644478
+      }
+    ],
+    "spec": {
+      "calibration": {
+        "note": "WM_TEXT_01 T1 calibration; thresholds tighten text/events shuffled ratio and require held-out family transfer rows.",
+        "status": "t_track_single_wg6_calibration",
+        "version": 1
+      },
+      "thresholds": {
+        "prediction_loss_max": {
+          "events": 5.75,
+          "text": 5.75
+        },
+        "probe_accuracy_min": 0.3,
+        "required_baselines": [
+          "persistence",
+          "unigram_or_frequency",
+          "shuffled_input"
+        ],
+        "shuffled_loss_ratio_min": {
+          "events": 0.75,
+          "text": 0.75
+        },
+        "transfer_loss_max": {
+          "events": 6.25,
+          "text": 6.25
+        }
+      }
+    }
+  },
+  "prediction": {
+    "events": {
+      "model_loss": 1.4258899454944185e-05,
+      "persistence_loss": 14.236640034418379,
+      "shuffled_input_loss": 12.249168793360392,
+      "unigram_or_frequency_loss": 3.8120043224824323
+    },
+    "text": {
+      "model_loss": 1.5990396756630314e-05,
+      "persistence_loss": 14.56795060587576,
+      "shuffled_input_loss": 15.074763456980387,
+      "unigram_or_frequency_loss": 3.23540849238773
+    }
+  },
+  "probes": [
+    {
+      "accuracy": 0.6875,
+      "modality": "text",
+      "probe": "text_nonterminal"
+    },
+    {
+      "accuracy": 0.0,
+      "modality": "events",
+      "probe": "event_verb"
+    },
+    {
+      "accuracy": 0.0,
+      "modality": "events",
+      "probe": "event_source"
+    }
+  ],
+  "step": 72000,
+  "transfer": {
+    "events": {
+      "eventv2_6": 1.4258899454944185e-05,
+      "eventv2_7": 0.004253362442644478
+    },
+    "text": {
+      "textv2_6": 1.5990396756630314e-05,
+      "textv2_7": 8.998347008552325e-05
+    }
+  }
+}

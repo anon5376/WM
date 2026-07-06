@@ -157,6 +157,7 @@ class Trainer:
         stop_at = max_steps if stop_after_steps is None else min(max_steps, self.step + stop_after_steps)
         if epoch_step_cap is not None:
             stop_at = min(stop_at, epoch_step_cap)
+        start_step = self.step
         metrics_path = self.run_path / "metrics.jsonl"
         while self.step < stop_at:
             if deadline is not None and time.time() >= deadline:
@@ -168,7 +169,7 @@ class Trainer:
             now = time.time()
             metric["wall_time_unix"] = now
             metric["elapsed_seconds"] = now - start_time
-            metric["steps_per_second"] = self.step / max(now - start_time, 1e-9)
+            metric["steps_per_second"] = (self.step - start_step) / max(now - start_time, 1e-9)
             if self.step % log_every == 0 or self.step == 1:
                 with metrics_path.open("a") as f:
                     f.write(json.dumps(metric, sort_keys=True) + "\n")

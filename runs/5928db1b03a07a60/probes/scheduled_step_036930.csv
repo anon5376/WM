@@ -1,0 +1,3 @@
+step,label,modality,probe,value
+36930,scheduled,events,scheduled_loss,0.00018005595484282821
+36930,scheduled,text,scheduled_loss,5.703342685592361e-05

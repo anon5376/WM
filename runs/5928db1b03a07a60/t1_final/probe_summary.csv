@@ -1,0 +1,4 @@
+modality,probe,accuracy
+text,text_nonterminal,0.6875
+events,event_verb,0.0
+events,event_source,0.0

@@ -1,0 +1,9 @@
+{
+  "label": "final",
+  "loss_by_modality": {
+    "events": 6.807475983805489e-06,
+    "text": 9.97481583908666e-06
+  },
+  "step": 72000,
+  "wall_time_unix": 1783359315.2400918
+}

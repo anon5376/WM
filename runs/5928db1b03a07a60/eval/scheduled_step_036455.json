@@ -1,0 +1,9 @@
+{
+  "label": "scheduled",
+  "loss_by_modality": {
+    "events": 2.440024763927795e-05,
+    "text": 1.6095631508505903e-05
+  },
+  "step": 36455,
+  "wall_time_unix": 1783349118.5997708
+}

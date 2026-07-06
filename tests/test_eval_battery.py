@@ -31,3 +31,22 @@ def test_eval_battery_outputs_baselines_probes_and_killtests(tmp_path: Path):
     assert (out / "metrics.json").exists()
     assert (out / "probe_summary.csv").exists()
     assert (out / "killtest_table.csv").exists()
+
+
+def test_eval_battery_supports_text_events_only(tmp_path: Path):
+    config = load_config("configs/test_tiny.yaml")
+    config["run_root"] = str(tmp_path / "run")
+    config["data"]["modalities"] = ["text", "events"]
+    config["loss_weights"] = {"text": 1.0, "events": 1.0}
+    config_path = tmp_path / "config.yaml"
+    config_path.write_text(yaml.safe_dump(config, sort_keys=True))
+    trainer = Trainer(config)
+    trainer.train(stop_after_steps=2)
+    checkpoint = trainer.latest_checkpoint()
+    assert checkpoint is not None
+    out = tmp_path / "eval"
+    metrics = run_battery(config_path, checkpoint, out)
+    assert set(metrics["prediction"]) == {"text", "events"}
+    assert {row["modality"] for row in metrics["probes"]} <= {"text", "events"}
+    assert set(metrics["transfer"]) == {"text", "events"}
+    assert (out / "killtest_table.csv").exists()
